@@ -1,0 +1,23 @@
+
+cat > pets
+dogs cats hamsters
+
+cat > pack_animals
+horses camels donkeys
+
+cat pets pack_animals > all_animals
+
+mv all_animals mans_friends
+
+ls -la
+
+mkdir f_test
+
+mv mans_friends ./f_test/
+
+3.
+
+ sudo dpkg -i mysql-apt-config_0.8.29-1_all.deb
+ sudo dpkg -i vivaldi-stable_6.5.3206.63-1_amd64.deb
+ apt list --installed
+ sudo dpkg -r vivaldi-stable
