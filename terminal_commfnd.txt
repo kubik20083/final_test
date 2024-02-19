@@ -1,4 +1,4 @@
-
+1.
 cat > pets
 dogs cats hamsters
 
@@ -10,6 +10,8 @@ cat pets pack_animals > all_animals
 mv all_animals mans_friends
 
 ls -la
+
+2.
 
 mkdir f_test
 
