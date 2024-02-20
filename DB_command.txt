@@ -1,0 +1,99 @@
+-- Создать базу данных "Друзья человека"
+DROP DATABASE IF EXISTS mens_friends;
+CREATE DATABASE IF NOT EXISTS mens_friends;
+USE mens_friends;
+
+-- Создать таблицы с иерархией из диаграммы в БД
+DROP TABLE IF EXISTS class_animals;
+CREATE TABLE IF NOT EXISTS class_animals
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY, 
+	Class_name VARCHAR(20) NOT NULL
+);
+INSERT INTO class_animals (Class_name)
+VALUES 
+("pets"),
+("pack_animals");
+
+DROP TABLE IF EXISTS pets;
+CREATE TABLE IF NOT EXISTS pets
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Type_id INT,
+    Animal_species VARCHAR(20),
+    FOREIGN KEY (Type_id) REFERENCES class_animals (Id)
+);
+INSERT INTO pets (Type_id, Animal_species)
+VALUES
+(1, "Cat"),
+(1, "Dog"),
+(1, "Hamster");
+
+DROP TABLE IF EXISTS pack_animals;
+CREATE TABLE IF NOT EXISTS pack_animals
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Type_id INT,
+    Animal_species VARCHAR(20),
+    FOREIGN KEY (Type_id) REFERENCES class_animals (Id)
+);
+INSERT INTO pack_animals (Type_id, Animal_species)
+VALUES
+(2, "Horse"),
+(2, "Camel"),
+(2, "Donkey");
+SELECT * FROM pets;
+SELECT * FROM pack_animals;
+
+-- Заполнить низкоуровневые таблицы именами(животных), командами которые они выполняют и датами рождения
+
+DROP TABLE IF EXISTS Cat;
+CREATE TABLE IF NOT EXISTS Cat
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Animal_species INT,
+    `Name` VARCHAR(50),
+    Command VARCHAR(50),
+    Birthday DATE,
+    FOREIGN KEY (Animal_species) REFERENCES pets (id)  
+);
+INSERT INTO Cat (Animal_species, `Name`, Command, Birthday)
+VALUES
+(1, "Ася", "спать, играть", "2022-01-02"),
+(1, "Муся", "спать, играть", "2022-03-03"),
+(1, "Буся", "спать, играть", "2022-04-04");
+SELECT * FROM Cat;
+
+DROP TABLE IF EXISTS Dog;
+CREATE TABLE IF NOT EXISTS Dog
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Animal_species INT,
+    `Name` VARCHAR(50),
+    Command VARCHAR(50),
+    Birthday DATE,
+    FOREIGN KEY (Animal_species) REFERENCES pets (id)  
+);
+INSERT INTO Cat (Animal_species, `Name`, Command, Birthday)
+VALUES
+(2, "Алмаз", "сидеть, лапу, фас", "2019-01-02"),
+(2, "Мухтар", "спать, играть", "2017-03-04"),
+(2, "Спайк", "спать, играть", "2020-03-04");
+SELECT * FROM Dog;
+
+DROP TABLE IF EXISTS Hamster;
+CREATE TABLE IF NOT EXISTS Hamster
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Animal_species INT,
+    `Name` VARCHAR(50),
+    Command VARCHAR(50),
+    Birthday DATE,
+    FOREIGN KEY (Animal_species) REFERENCES pets (id)  
+);
+INSERT INTO Hamster (Animal_species, `Name`, Command, Birthday)
+VALUES
+(3, "Гарри", "бегать, есть", "2022-03-02"),
+(3, "Рон", "бегать, есть", "2018-03-08"),
+(3, "Пух", "бегать, есть", "2023-06-04");
+SELECT * FROM Hamster;
