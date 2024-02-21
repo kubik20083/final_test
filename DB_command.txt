@@ -97,3 +97,63 @@ VALUES
 (3, "Рон", "бегать, есть", "2018-03-08"),
 (3, "Пух", "бегать, есть", "2023-06-04");
 SELECT * FROM Hamster;
+
+DROP TABLE IF EXISTS Horse;
+CREATE TABLE IF NOT EXISTS Horse
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Animal_species INT,
+    `Name` VARCHAR(50),
+    Command VARCHAR(50),
+    Birthday DATE,
+    FOREIGN KEY (Animal_species) REFERENCES pack_animals (id)  
+);
+INSERT INTO Horse (Animal_species, `Name`, Command, Birthday)
+VALUES
+(1, "Апполон", "голопом, рысью", "2022-04-08"),
+(1, "Базилик", "голопом, рысью", "2020-11-11"),
+(1, "Версаль", "голопом, рысью", "2021-06-04");
+SELECT * FROM Horse;
+
+DROP TABLE IF EXISTS Camel;
+CREATE TABLE IF NOT EXISTS Camel
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Animal_species INT,
+    `Name` VARCHAR(50),
+    Command VARCHAR(50),
+    Birthday DATE,
+    FOREIGN KEY (Animal_species) REFERENCES pack_animals (id)  
+);
+INSERT INTO Camel (Animal_species, `Name`, Command, Birthday)
+VALUES
+(2, "Денеб", "Гит, Дур, Каш", "2019-04-22"),
+(2, "Хлоя", "Гит, Дур, Каш", "2018-11-30"),
+(2, "Омлет", "Гит, Дур, Каш", "2017-06-28");
+SELECT * FROM Camel;
+
+DROP TABLE IF EXISTS Donkey;
+CREATE TABLE IF NOT EXISTS Donkey
+(
+	Id INT AUTO_INCREMENT PRIMARY KEY,
+    Animal_species INT,
+    `Name` VARCHAR(50),
+    Command VARCHAR(50),
+    Birthday DATE,
+    FOREIGN KEY (Animal_species) REFERENCES pack_animals (id)  
+);
+INSERT INTO Donkey (Animal_species, `Name`, Command, Birthday)
+VALUES
+(3, "Дюна", "вперед, стоять", "2019-04-22"),
+(3, "Перл", "вперед, стоять", "2018-11-30"),
+(3, "Изабель", "вперед, стоять", "2017-06-28");
+SELECT * FROM Donkey;
+
+-- 10. Удалив из таблицы верблюдов, т.к. верблюдов решили перевезти в другой питомник на зимовку.
+-- Объединить таблицы лошади, и ослы в одну таблицу.
+
+DROP TABLE Camel;
+
+CREATE TABLE cloven_footed
+AS( SELECT * FROM Horse UNION SELECT * FROM Donkey);
+SELECT * FROM cloven_footed;
