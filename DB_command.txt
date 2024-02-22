@@ -157,3 +157,29 @@ DROP TABLE Camel;
 CREATE TABLE cloven_footed
 AS( SELECT * FROM Horse UNION SELECT * FROM Donkey);
 SELECT * FROM cloven_footed;
+
+-- Объединить все таблицы в одну, при этом сохраняя поля, указывающие на
+-- прошлую принадлежность к старым таблицам.
+
+DROP TABLE IF EXISTS All_animals;
+CREATE TABLE IF NOT EXISTS All_animals
+AS(
+SELECT * FROM Cat UNION
+SELECT * FROM Dog UNION
+SELECT * FROM Hamster UNION
+SELECT * FROM Horse UNION
+SELECT * FROM Donkey);
+
+SELECT * FROM All_animals;
+
+-- Создать новую таблицу “молодые животные” в которую попадут все
+-- животные старше 1 года, но младше 3 лет и в отдельном столбце с точностью
+-- до месяца подсчитать возраст животных в новой таблице
+
+DROP TABLE IF EXISTS Young_animals;
+CREATE TABLE IF NOT EXISTS Young_animals AS
+SELECT `Name`, Command, Birthday, TIMESTAMPDIFF(MONTH, Birthday, CURDATE()) AS Age_in_month
+FROM All_animals 
+WHERE Birthday BETWEEN ADDDATE(curdate(), INTERVAL -3 YEAR) AND ADDDATE(CURDATE(), INTERVAL -1 YEAR);
+SELECT * FROM Young_animals;
+SELECT * FROM All_animals;
