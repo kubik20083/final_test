@@ -1,8 +1,12 @@
 package packAnimals;
 
-import pets.PetsAbstract;
+public class Horse extends PackAnimalsAbstract{
+    public Horse(int id, String name, int age, String classAnimal) {
+        super(id, name, age, classAnimal);
+    }
 
-public class Horse extends PetsAbstract {
-    public Horse() {
+    @Override
+    public String toString() {
+        return "Horse{}";
     }
 }
